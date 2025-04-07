@@ -121,7 +121,7 @@ export default function Hero() {
               }
             />
             {isDeadpool && (
-              <div className="absolute top-50 -z-1 flex min-h-[90px] w-[250px] items-center rounded-md bg-red-950/50 p-2">
+              <div className="absolute top-58 -z-1 flex min-h-[90px] w-[250px] items-center rounded-md bg-red-950/50 p-2">
                 <span className="text-white">{quotes[quoteIndex]}</span>
               </div>
             )}

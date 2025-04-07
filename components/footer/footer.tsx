@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <footer className="border-b py-5">
       <div className="container mx-auto font-bold">
-        <div className="flex justify-between text-center text-sm">
+        <div className="flex flex-col items-center justify-between gap-y-3 text-center text-sm md:flex-row">
           <div
             className={
               isDeadpool
