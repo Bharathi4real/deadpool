@@ -1,5 +1,6 @@
 'use client';
 
+import { useModeStore } from '@/app/lib/store/store';
 import { Button } from '@/components/ui/button';
 import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 
@@ -10,25 +11,17 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 export const navigationItems = [
-  {
-    title: 'Traffic Light',
-    href: '/traffic-light',
-    items: [],
-  },
-  {
-    title: 'Snake Game',
-    href: '/snake-game',
-    items: [],
-  },
-  {
-    title: 'Memory Game',
-    href: '/memory-game',
-    items: [],
-  },
+  { title: 'Home', href: '#' },
+  { title: 'About', href: '#' },
+  { title: 'Skills', href: '#' },
+  { title: 'Projects', href: '#' },
+  { title: 'Resume', href: '#' },
+  { title: 'Contact', href: '#' },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const isDeadpool = useModeStore((s) => s.isDeadpool);
   const pathname = usePathname();
 
   return (
@@ -37,23 +30,23 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <Link href="/">
             <Image
-              src="/images/orcdev.png"
-              alt="Orc Dev"
+              src={isDeadpool ? '/images/deadpool.webp' : '/images/hero.svg'}
+              alt="Bharathi's Avatar"
               width={50}
               height={50}
             />
           </Link>
 
           <div className="hidden gap-4 md:flex">
-            {navigationItems.map((item) => (
+            {navigationItems.map((item, index) => (
               <Link
-                key={item.href}
+                key={index}
                 href={item.href}
-                className={`transition-colors hover:text-primary ${
-                  pathname === item.href
-                    ? 'font-semibold text-primary'
-                    : 'text-muted-foreground'
-                }`}
+                className={
+                  isDeadpool
+                    ? 'text-lg font-bold text-secondary transition-colors hover:text-primary'
+                    : 'text-lg font-bold text-primary transition-colors hover:text-secondary'
+                }
               >
                 {item.title}
               </Link>
@@ -74,11 +67,11 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="flex flex-col items-center justify-center gap-3 px-5 py-3 md:hidden">
-          {navigationItems.map((item) => (
+          {navigationItems.map((item, index) => (
             <Link
-              key={item.href}
+              key={index}
               href={item.href}
-              className={`transition-colors hover:text-primary ${
+              className={`text-lg font-bold transition-colors hover:text-primary ${
                 pathname === item.href
                   ? 'font-semibold text-primary'
                   : 'text-muted-foreground'

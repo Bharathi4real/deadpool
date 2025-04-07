@@ -5,28 +5,23 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FileTextIcon, MailIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
+import { useModeStore } from '@/app/lib/store/store';
 
 export default function Hero() {
-  const [mode, setMode] = useState<'deadpool mode' | 'professional mode'>(
-    () =>
-      (typeof window !== 'undefined' &&
-        (localStorage.getItem('mode') as
-          | 'deadpool mode'
-          | 'professional mode')) ||
-      'professional mode',
-  );
+  const { mode, toggleMode, isDeadpool } = useModeStore();
 
   const [quoteIndex, setQuoteIndex] = useState(0);
-  const isDeadpool = mode === 'deadpool mode';
 
-  const toggleMode = () => {
-    const newMode =
-      mode === 'deadpool mode' ? 'professional mode' : 'deadpool mode';
-    setMode(newMode);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('mode', newMode);
-    }
-  };
+  const quotes = useMemo(
+    () => [
+      'Typing... sarcasm.exe launched.',
+      'My code is like my jokes. Not everyone gets it.',
+      'sudo make me a sandwich',
+      "I break code so you don't have to!",
+      'Maximum effort, minimum documentation.',
+    ],
+    [],
+  );
 
   // Data
   const title = {
@@ -89,17 +84,6 @@ export default function Hero() {
     professional: ['React', 'Next.js', 'TS', 'Tailwind'],
     deadpool: ['Stabby', 'Boomy', 'Healy', 'Snarky'],
   };
-
-  const quotes = useMemo(
-    () => [
-      'Typing... sarcasm.exe launched.',
-      'My code is like my jokes. Not everyone gets it.',
-      'sudo make me a sandwich',
-      "I break code so you don't have to!",
-      'Maximum effort, minimum documentation.',
-    ],
-    [],
-  );
 
   useEffect(() => {
     if (!isDeadpool) return;
