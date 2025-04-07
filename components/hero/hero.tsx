@@ -8,15 +8,24 @@ import { useEffect, useMemo, useState } from 'react';
 
 export default function Hero() {
   const [mode, setMode] = useState<'deadpool mode' | 'professional mode'>(
-    'professional mode',
+    () =>
+      (typeof window !== 'undefined' &&
+        (localStorage.getItem('mode') as
+          | 'deadpool mode'
+          | 'professional mode')) ||
+      'professional mode',
   );
-  const isDeadpool = mode === 'deadpool mode';
+
   const [quoteIndex, setQuoteIndex] = useState(0);
+  const isDeadpool = mode === 'deadpool mode';
 
   const toggleMode = () => {
-    setMode((prev) =>
-      prev === 'deadpool mode' ? 'professional mode' : 'deadpool mode',
-    );
+    const newMode =
+      mode === 'deadpool mode' ? 'professional mode' : 'deadpool mode';
+    setMode(newMode);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mode', newMode);
+    }
   };
 
   // Data
