@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -137,7 +137,10 @@
   --sidebar-ring: #bde0fe;
 }
 
-
+/* hide scrollbar */
+::-webkit-scrollbar {
+  @apply hidden;
+}
 
 @layer base {
   * {
@@ -148,30 +151,27 @@
   }
 }
 
-
 /* thought bubble */
 .thought {
-  @apply flex items-center justify-center text-center relative
-         bg-foreground p-5 rounded-[2rem] min-w-[2.5rem] min-h-[100px] max-w-[14rem] z-10;
+  @apply relative mx-auto flex min-h-[120px] max-w-[90%] min-w-[13rem] items-center justify-center rounded-[2rem] bg-white p-4 text-center sm:max-w-[10rem];
 }
 
 .thought:before,
 .thought:after {
-  content: "";
-  @apply bg-white rounded-full block absolute -z-10;
+  content: '';
+  @apply absolute -z-10 block rounded-full bg-white;
 }
 
 .thought:before {
-  @apply w-[44px] h-[44px] top-[-12px] left-[28px];
+  @apply top-[-12px] left-[28px] h-[44px] w-[44px];
   box-shadow: -50px 30px 0 -12px #fff;
 }
 
 .thought:after {
-  @apply w-[30px] h-[30px] bottom-[-10px] right-[26px];
+  @apply right-[26px] bottom-[-10px] h-[30px] w-[30px];
   box-shadow:
     40px -34px 0 0 #fff,
     -28px -6px 0 -2px #fff,
     -24px 17px 0 -6px #fff,
     -5px 25px 0 -10px #fff;
 }
-
