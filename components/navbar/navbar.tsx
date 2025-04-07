@@ -14,6 +14,7 @@ export const navigationItems = [
   { title: 'Home', href: '#' },
   { title: 'About', href: '#' },
   { title: 'Skills', href: '#' },
+  { title: 'Experience', href: '#experience' },
   { title: 'Projects', href: '#' },
   { title: 'Resume', href: '#' },
   { title: 'Contact', href: '#' },

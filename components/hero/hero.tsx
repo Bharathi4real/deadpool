@@ -96,7 +96,7 @@ export default function Hero() {
   }, [isDeadpool, quotes.length]);
 
   return (
-    <div className="container mx-auto min-h-screen px-4 pt-28 pb-12 md:px-6 lg:px-8">
+    <div className="container mx-auto mt-28 min-h-screen py-10 md:py-16">
       <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 lg:gap-16">
         <div className="flex flex-col items-center space-y-3 md:items-start">
           <Button

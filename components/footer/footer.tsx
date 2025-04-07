@@ -2,24 +2,26 @@
 
 import Link from 'next/link';
 import { useModeStore } from '@/app/lib/store/store';
+import { HeartIcon } from 'lucide-react';
 
-const links = [
-  { title: 'Home', href: '#' },
-  { title: 'About', href: '#' },
-  { title: 'Skills', href: '#' },
-  { title: 'Projects', href: '#' },
-  { title: 'Resume', href: '#' },
-  { title: 'Contact', href: '#' },
-];
+// const links = [
+//   { title: 'Home', href: '#' },
+//   { title: 'About', href: '#' },
+//   { title: 'Skills', href: '#' },
+//   { title: 'Experience', href: '#experience' },
+//   { title: 'Projects', href: '#' },
+//   { title: 'Resume', href: '#' },
+//   { title: 'Contact', href: '#' },
+// ];
 
 export default function Footer() {
   const isDeadpool = useModeStore((s) => s.isDeadpool);
 
   return (
     <footer className="border-b py-5">
-      <div className="mx-auto max-w-5xl px-6 font-bold">
-        <div className="flex flex-wrap justify-between gap-6">
-          <span
+      <div className="container mx-auto font-bold">
+        <div className="flex justify-between text-center text-sm">
+          <div
             className={
               isDeadpool
                 ? 'text-secondary hover:text-primary'
@@ -27,8 +29,32 @@ export default function Footer() {
             }
           >
             © {new Date().getFullYear()} Bharathi4real, All rights reserved
-          </span>
-          <div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
+          </div>
+          <div className="flex items-center gap-2">
+            Made with{' '}
+            <span
+              className={
+                isDeadpool
+                  ? 'text-secondary hover:text-primary'
+                  : 'text-primary hover:text-secondary'
+              }
+            >
+              <HeartIcon className="size-4 fill-current" />
+            </span>{' '}
+            by{' '}
+            <Link
+              href="https://www.bharathi.online"
+              className={
+                isDeadpool
+                  ? 'text-secondary hover:text-primary'
+                  : 'text-primary hover:text-secondary'
+              }
+              target="_blank"
+            >
+              Bharathi4real
+            </Link>
+          </div>
+          {/* <div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
             {links.map((link, index) => (
               <Link
                 key={index}
@@ -42,7 +68,7 @@ export default function Footer() {
                 <span>{link.title}</span>
               </Link>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
