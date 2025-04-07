@@ -28,7 +28,7 @@ export default function Hero() {
           Bharathi
         </span>
         . <br className="hidden md:block" />
-        <span className="mt-2 block text-3xl">
+        <span className="mt-2 block text-xl sm:text-2xl md:text-3xl">
           I code. I break stuff. Then fix it (usually).
         </span>
       </>
@@ -37,7 +37,7 @@ export default function Hero() {
       <>
         Hi, I'm <span className="text-blue-500">Bharathi</span>
         <br className="hidden md:block" />
-        <span className="mt-2 block">
+        <span className="mt-2 block text-xl sm:text-2xl md:text-3xl">
           Building exceptional web experiences.
         </span>
       </>
@@ -89,14 +89,14 @@ export default function Hero() {
 
     const interval = setInterval(() => {
       setQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
-    }, 4000); // change quote every 4s
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isDeadpool, quotes.length]);
 
   return (
     <HeroBg>
-      <div className="container mx-auto flex min-h-[90vh] flex-col-reverse items-center justify-center gap-12 px-4 pt-20 pb-12 md:grid md:min-h-screen md:grid-cols-2 md:items-center md:gap-16 md:px-6 lg:px-8">
+      <div className="container mx-auto flex min-h-screen flex-col-reverse items-center justify-center gap-12 px-4 pt-28 pb-12 md:grid md:grid-cols-2 md:gap-16 md:px-6 lg:px-8">
         {/* Left Content */}
         <div className="relative flex flex-col items-center gap-6 text-center md:items-start md:gap-8 md:text-left">
           {/* Toggle (Mobile) */}
@@ -104,11 +104,9 @@ export default function Hero() {
             <Button
               onClick={toggleMode}
               variant="outline"
-              className="inline-flex w-full cursor-pointer items-center justify-center rounded-full text-sm"
+              className="inline-flex w-full items-center justify-center rounded-full text-sm"
             >
-              <span className="flex h-full w-full items-center justify-center">
-                {isDeadpool ? 'Professional Mode' : 'Deadpool Mode'}
-              </span>
+              {isDeadpool ? 'Professional Mode' : 'Deadpool Mode'}
             </Button>
           </div>
 
@@ -120,7 +118,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4 }}
-              className="text-4xl font-bold tracking-tight text-black md:text-5xl lg:text-6xl dark:text-white"
+              className="text-3xl font-bold tracking-tight text-black sm:text-4xl md:text-5xl lg:text-6xl dark:text-white"
             >
               {isDeadpool ? title.deadpool : title.professional}
             </motion.h1>
@@ -134,7 +132,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="max-w-xl text-lg text-zinc-700 dark:text-zinc-300"
+              className="max-w-xl text-base text-zinc-700 sm:text-lg dark:text-zinc-300"
             >
               {isDeadpool ? description.deadpool : description.professional}
             </motion.p>
@@ -193,19 +191,17 @@ export default function Hero() {
           </AnimatePresence>
 
           {/* Buttons */}
-          <div className="mt-2 flex items-center justify-center gap-4 md:justify-start">
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-4 md:justify-start">
             <Button
               variant="default"
               className={
                 isDeadpool
-                  ? 'inline-flex cursor-pointer items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600'
-                  : 'inline-flex cursor-pointer items-center justify-center'
+                  ? 'inline-flex items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600'
+                  : 'inline-flex items-center justify-center'
               }
             >
               {isDeadpool ? (
-                <span className="flex items-center justify-center">
-                  {buttons.deadpool.resume}
-                </span>
+                <span>{buttons.deadpool.resume}</span>
               ) : (
                 <span className="flex items-center gap-2">
                   <FileTextIcon size={18} />
@@ -217,12 +213,10 @@ export default function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="group inline-flex cursor-pointer items-center justify-center"
+              className="group inline-flex items-center justify-center"
             >
               {isDeadpool ? (
-                <span className="flex items-center justify-center">
-                  {buttons.deadpool.contact}
-                </span>
+                <span>{buttons.deadpool.contact}</span>
               ) : (
                 <span className="flex items-center gap-2">
                   <MailIcon size={18} />
@@ -235,8 +229,6 @@ export default function Hero() {
 
         {/* Right: Image + Toggle */}
         <div className="relative flex flex-col items-center justify-center">
-          {/* Toggle (Desktop) */}
-
           <Button
             onClick={toggleMode}
             variant="outline"
@@ -245,7 +237,6 @@ export default function Hero() {
             {isDeadpool ? 'Professional Mode' : 'Deadpool Mode'}
           </Button>
 
-          {/* Image + Quote */}
           <AnimatePresence mode="wait">
             <motion.div
               key={`image-${mode}`}
@@ -253,10 +244,14 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.5 }}
-              className="relative flex w-full items-center justify-center"
+              className="relative flex min-h-[300px] w-full items-center justify-center sm:min-h-[400px] md:min-h-[520px]"
             >
               <div
-                className={`absolute inset-0 rounded-full ${isDeadpool ? 'bg-gradient-to-br from-rose-200 to-pink-100 dark:from-rose-900/20 dark:to-pink-800/10' : 'bg-blue-100 dark:bg-blue-900/20'} opacity-70 blur-3xl`}
+                className={`absolute inset-0 rounded-full ${
+                  isDeadpool
+                    ? 'bg-gradient-to-br from-rose-200 to-pink-100 dark:from-rose-900/20 dark:to-pink-800/10'
+                    : 'bg-blue-100 dark:bg-blue-900/20'
+                } opacity-70 blur-3xl`}
               ></div>
 
               <Image
@@ -265,12 +260,11 @@ export default function Hero() {
                 width={500}
                 height={500}
                 priority
-                className="relative z-10 h-auto max-w-[80%] md:max-w-full"
+                className="relative z-10 h-[250px] w-[250px] object-contain sm:h-[350px] sm:w-[350px] md:h-[500px] md:w-[500px]"
               />
 
-              {/* Comic Bubble */}
               {isDeadpool && (
-                <div className="thought absolute -top-66 -left-110 z-20 text-black">
+                <div className="thought absolute -top-65 -left-7/12 -translate-x-1/2 z-5 w-[240px] h-[100px] text-center text-black">
                   <AnimatePresence mode="wait">
                     <motion.p
                       key={quoteIndex}

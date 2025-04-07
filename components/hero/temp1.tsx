@@ -1,21 +1,25 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { HeroBg } from '@/components/ui/hero-bg';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FileTextIcon, MailIcon } from 'lucide-react';
 import Image from 'next/image';
-import { ArrowRightIcon, FileTextIcon, MailIcon } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function Hero() {
-  const [mode, setMode] = useState<'deadpool' | 'professional'>('professional');
-  const isDeadpool = mode === 'deadpool';
+  const [mode, setMode] = useState<'deadpool mode' | 'professional mode'>(
+    'professional mode',
+  );
+  const isDeadpool = mode === 'deadpool mode';
+  const [quoteIndex, setQuoteIndex] = useState(0);
 
   const toggleMode = () => {
-    setMode((prev) => (prev === 'deadpool' ? 'professional' : 'deadpool'));
+    setMode((prev) =>
+      prev === 'deadpool mode' ? 'professional mode' : 'deadpool mode',
+    );
   };
 
-  // Title content for each mode
   const title = {
     deadpool: (
       <>
@@ -24,7 +28,7 @@ export default function Hero() {
           Bharathi
         </span>
         . <br className="hidden md:block" />
-        <span className="mt-2 block">
+        <span className="mt-2 block text-3xl">
           I code. I break stuff. Then fix it (usually).
         </span>
       </>
@@ -40,15 +44,22 @@ export default function Hero() {
     ),
   };
 
-  // More engaging descriptions
   const description = {
-    deadpool:
-      'Saving the digital universe one `npm install` at a time. Armed with code, snacks, and questionable jokes.',
-    professional:
-      'Full-stack developer focused on crafting intuitive, robust applications with modern web technologies and clean design principles.',
+    deadpool: (
+      <>
+        Saving the digital universe one{' '}
+        <span className="text-secondary">'npm install'</span> at a time. Armed
+        with code, snacks, and questionable jokes.
+      </>
+    ),
+    professional: (
+      <>
+        Full-stack developer focused on crafting intuitive, robust applications
+        with modern web technologies and clean design principles.
+      </>
+    ),
   };
 
-  // Button text variations
   const buttons = {
     deadpool: {
       resume: '🧾 Hire Me (I Dare You)',
@@ -60,36 +71,48 @@ export default function Hero() {
     },
   };
 
-  // Skills badges - only shown in professional mode
   const skills = ['React', 'TypeScript', 'Next.js', 'UI/UX', 'Tailwind'];
 
-  // Quote bubbles that change randomly - only in deadpool mode
-  const quotes = [
-    'Typing... sarcasm.exe launched.',
-    'My code is like my jokes. Not everyone gets it.',
-    'sudo make me a sandwich',
-    "I break code so you don't have to!",
-    'Maximum effort, minimum documentation.',
-  ];
+  const quotes = useMemo(
+    () => [
+      'Typing... sarcasm.exe launched.',
+      'My code is like my jokes. Not everyone gets it.',
+      'sudo make me a sandwich',
+      "I break code so you don't have to!",
+      'Maximum effort, minimum documentation.',
+    ],
+    [],
+  );
+
+  useEffect(() => {
+    if (!isDeadpool) return;
+
+    const interval = setInterval(() => {
+      setQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    }, 4000); // change quote every 4s
+
+    return () => clearInterval(interval);
+  }, [isDeadpool, quotes.length]);
 
   return (
     <HeroBg>
-      <div className="container mx-auto grid min-h-screen grid-cols-1 items-center gap-16 px-4 pt-28 pb-16 md:grid-cols-2 md:px-6 lg:px-8">
+      <div className="container mx-auto flex min-h-screen flex-col-reverse items-center justify-center gap-12 px-4 pt-28 pb-12 md:grid md:min-h-screen md:grid-cols-2 md:items-center md:gap-16 md:px-6 lg:px-8">
         {/* Left Content */}
         <div className="relative flex flex-col items-center gap-6 text-center md:items-start md:gap-8 md:text-left">
-          {/* Mode Toggle (Small screens) */}
+          {/* Toggle (Mobile) */}
           <div className="mb-2 block md:hidden">
             <Button
               onClick={toggleMode}
               variant="outline"
-              size="sm"
-              className="rounded-full text-sm"
+              className="inline-flex w-full cursor-pointer items-center justify-center rounded-full text-sm"
             >
-              {isDeadpool ? 'Switch to Professional' : 'Switch to Deadpool'}
+              <span className="flex h-full w-full items-center justify-center">
+                {isDeadpool ? 'Professional Mode' : 'Deadpool Mode'}
+              </span>
             </Button>
           </div>
 
-          {/* Animated Title */}
+          {/* Title */}
           <AnimatePresence mode="wait">
             <motion.h1
               key={`title-${mode}`}
@@ -103,7 +126,7 @@ export default function Hero() {
             </motion.h1>
           </AnimatePresence>
 
-          {/* Animated Description */}
+          {/* Description */}
           <AnimatePresence mode="wait">
             <motion.p
               key={`desc-${mode}`}
@@ -117,7 +140,7 @@ export default function Hero() {
             </motion.p>
           </AnimatePresence>
 
-          {/* Skills Section - Only in Professional Mode */}
+          {/* Skills */}
           <AnimatePresence>
             {!isDeadpool && (
               <motion.div
@@ -127,7 +150,7 @@ export default function Hero() {
                 transition={{ duration: 0.3, delay: 0.2 }}
                 className="flex flex-wrap justify-center gap-2 md:justify-start"
               >
-                {skills.map((skill, index) => (
+                {skills.map((skill) => (
                   <span
                     key={skill}
                     className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600 dark:bg-blue-900/30 dark:text-blue-300"
@@ -139,7 +162,7 @@ export default function Hero() {
             )}
           </AnimatePresence>
 
-          {/* Power Level - Only in Deadpool Mode */}
+          {/* Power Level */}
           <AnimatePresence>
             {isDeadpool && (
               <motion.div
@@ -170,18 +193,19 @@ export default function Hero() {
           </AnimatePresence>
 
           {/* Buttons */}
-          <div className="mt-2 flex flex-wrap justify-center gap-4 md:justify-start">
+          <div className="mt-2 flex items-center justify-center gap-4 md:justify-start">
             <Button
-              size="lg"
-              variant={isDeadpool ? 'default' : 'default'}
+              variant="default"
               className={
                 isDeadpool
-                  ? 'bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600'
-                  : ''
+                  ? 'inline-flex cursor-pointer items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600'
+                  : 'inline-flex cursor-pointer items-center justify-center'
               }
             >
               {isDeadpool ? (
-                buttons.deadpool.resume
+                <span className="flex items-center justify-center">
+                  {buttons.deadpool.resume}
+                </span>
               ) : (
                 <span className="flex items-center gap-2">
                   <FileTextIcon size={18} />
@@ -190,54 +214,38 @@ export default function Hero() {
               )}
             </Button>
 
-            <Button size="lg" variant="outline" className="group">
+            <Button
+              size="lg"
+              variant="outline"
+              className="group inline-flex cursor-pointer items-center justify-center"
+            >
               {isDeadpool ? (
-                buttons.deadpool.contact
+                <span className="flex items-center justify-center">
+                  {buttons.deadpool.contact}
+                </span>
               ) : (
                 <span className="flex items-center gap-2">
                   <MailIcon size={18} />
                   {buttons.professional.contact}
-                  <ArrowRightIcon
-                    size={16}
-                    className="-translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
-                  />
                 </span>
               )}
             </Button>
           </div>
-
-          {/* Comic Bubble - Only in Deadpool Mode */}
-          {isDeadpool && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="absolute -top-16 left-4 w-max max-w-xs rounded-lg bg-white p-3 shadow-lg md:-top-14 md:left-0 dark:bg-zinc-800 dark:text-white"
-              style={{
-                clipPath:
-                  'polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 30% 100%, 50% 75%, 0% 75%)',
-              }}
-            >
-              <p className="mb-2 text-sm font-medium">{quotes[0]}</p>
-            </motion.div>
-          )}
         </div>
 
-        {/* Right: Image and Mode Toggle */}
-        <div className="relative flex flex-col items-center gap-8">
-          {/* Mode Toggle (Desktop) */}
-          <div className="absolute top-0 right-0 z-10 hidden md:block">
-            <Button
-              onClick={toggleMode}
-              variant="outline"
-              size="sm"
-              className="rounded-full shadow-sm"
-            >
-              {isDeadpool ? 'Switch to Professional' : 'Switch to Deadpool'}
-            </Button>
-          </div>
+        {/* Right: Image + Toggle */}
+        <div className="relative flex flex-col items-center justify-center">
+          {/* Toggle (Desktop) */}
 
-          {/* Hero Image with Animation */}
+          <Button
+            onClick={toggleMode}
+            variant="outline"
+            className="z-10 hidden self-end rounded-full text-sm md:block"
+          >
+            {isDeadpool ? 'Professional Mode' : 'Deadpool Mode'}
+          </Button>
+
+          {/* Image + Quote */}
           <AnimatePresence mode="wait">
             <motion.div
               key={`image-${mode}`}
@@ -245,23 +253,41 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.5 }}
-              className="relative flex w-full items-center justify-center"
+              className="relative flex min-h-[520px] w-full items-center justify-center" // <-- Set min-height
             >
               <div
-                className={`absolute inset-0 rounded-full ${isDeadpool ? 'bg-gradient-to-br from-rose-200 to-pink-100 dark:from-rose-900/20 dark:to-pink-800/10' : 'bg-blue-100 dark:bg-blue-900/20'} opacity-70 blur-3xl`}
-              ></div>
-              <Image
-                src={
+                className={`absolute inset-0 rounded-full ${
                   isDeadpool
-                    ? '/images/hero-bharathi-deadpool-dev.svg'
-                    : '/images/hero-bharathi-professional.svg'
-                }
+                    ? 'bg-gradient-to-br from-rose-200 to-pink-100 dark:from-rose-900/20 dark:to-pink-800/10'
+                    : 'bg-blue-100 dark:bg-blue-900/20'
+                } opacity-70 blur-3xl`}
+              ></div>
+
+              <Image
+                src={isDeadpool ? '/images/deadpool.webp' : '/images/hero.svg'}
                 alt="Bharathi's avatar"
-                width={550}
-                height={550}
+                width={500}
+                height={500}
                 priority
-                className="relative z-10 h-auto max-w-[90%] md:max-w-full"
+                className="mask-fade-bottom relative z-10 h-[500px] w-[500px] object-contain"
               />
+
+              {isDeadpool && (
+                <div className="thought absolute -top-66 -left-110 z-5 text-black">
+                  <AnimatePresence mode="wait">
+                    <motion.p
+                      key={quoteIndex}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.4 }}
+                      className="text-sm font-medium"
+                    >
+                      {quotes[quoteIndex]}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
