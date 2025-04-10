@@ -6,12 +6,18 @@ import { Building2, Calendar } from 'lucide-react';
 
 const experiences = [
   {
-    title: 'Senior Full Stack Developer',
+    title: 'UI/UX Designer',
     company: 'Zinavo Private Limited',
     period: '2023 - Present',
     description:
-      'Led the development of enterprise-scale web applications, mentored junior developers, and implemented best practices for code quality and performance optimization.',
-    technologies: ['React', 'Node.js', 'TypeScript', 'AWS', 'MongoDB'],
+      'Design user-centric websites that align with business goals and developer handoff requirements. Collaborate with development teams to ensure smooth transitions from design to code, focusing on usability, accessibility, and consistency.',
+    technologies: [
+      'Figma',
+      'Adobe XD',
+      'Photoshop',
+      'Illustrator',
+      'Design Systems',
+    ],
   },
 ];
 
@@ -19,16 +25,8 @@ export default function Experience() {
   const isDeadpool = useModeStore((state) => state.isDeadpool);
 
   return (
-    <div id="experience" className="container mx-auto py-10 md:py-16">
-      <h2
-        className={
-          isDeadpool
-            ? 'mb-8 text-2xl font-bold text-secondary'
-            : 'mb-8 text-2xl font-bold text-primary'
-        }
-      >
-        Experience
-      </h2>
+    <div id="experience" className="container mx-auto py-12 md:py-20">
+      <h2 className="mb-8 text-4xl font-semibold tracking-tight">Experience</h2>
       <div className="relative ml-3">
         {/* Timeline line */}
         <div

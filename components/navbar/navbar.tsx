@@ -13,13 +13,13 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 export const navigationItems = [
-  { title: 'Home', href: '#' },
-  { title: 'About', href: '#' },
-  { title: 'Skills', href: '#' },
+  { title: 'Home', href: '#home' },
+  { title: 'About', href: '#about' },
+  { title: 'Skills', href: '#skills' },
   { title: 'Experience', href: '#experience' },
-  { title: 'Projects', href: '#' },
-  { title: 'Resume', href: '#' },
-  { title: 'Contact', href: '#' },
+  { title: 'Projects', href: '#projects' },
+  { title: 'Resume', href: '#resume' },
+  { title: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
