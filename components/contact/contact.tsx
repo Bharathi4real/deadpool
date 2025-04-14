@@ -35,7 +35,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="container flex min-h-screen items-center justify-center py-12 md:py-20"
+      className="flexw-full container items-center justify-center py-12 md:py-20"
     >
       <div className="text-center">
         <h2 className="text-2xl font-semibold tracking-tight md:text-4xl">
