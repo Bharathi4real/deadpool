@@ -148,7 +148,7 @@ export function StackedCarousel({
             >
               {isActive && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-2xl bg-black/60 p-4 text-center text-white transition-opacity duration-500">
-                  <h3 className="text-base font-semibold sm:text-xl">
+                  <h3 className="font-semibold text-base md:text-xl">
                     {slide.title}
                   </h3>
                   <a
