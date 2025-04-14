@@ -95,7 +95,7 @@ export default function Navbar() {
                 <Menu className="size-4" />
               </Button>
             </DrawerTrigger>
-            <DrawerContent className="space-y-4 bg-accent p-6 backdrop-blur-md">
+            <DrawerContent className="space-y-4 bg-background p-6 backdrop-blur-md">
               <DrawerTitle className="sr-only">Navigation Menu</DrawerTitle>
               {navigationItems.map((item, index) => (
                 <div

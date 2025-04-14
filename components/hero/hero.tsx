@@ -94,7 +94,7 @@ export default function Hero() {
 
   return (
     <section id="home">
-      <div className="container mx-auto mt-28 min-h-screen py-10 md:py-16">
+      <div className="container mx-auto mt-28  py-10 md:py-16">
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 lg:gap-16">
           <div className="flex flex-col items-center space-y-3 md:items-start">
             <Button
