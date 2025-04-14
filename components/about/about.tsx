@@ -10,10 +10,12 @@ export default function About() {
       <div className="grid gap-12 md:grid-cols-12 md:items-center">
         {/* Left - Introduction */}
         <div className="space-y-6 md:col-span-5">
-          <h2 className="text-xl leading-tight font-semibold lg:text-3xl">
-            Hey, I&rsquo;m a UI/UX Designer Crafting Seamless & Engaging
-            Interfaces
+          <h2 className="mb-6 text-4xl font-semibold tracking-tight">
+            About Me
           </h2>
+          <h3 className="text-xl leading-tight font-semibold lg:text-3xl">
+            I&rsquo;m a UI/UX Designer Crafting Seamless & Engaging Interfaces
+          </h3>
           <p className="text-lg text-muted-foreground">
             I specialize in designing clean, user-focused interfaces using
             design systems and modern frameworks. With a strong eye for detail

@@ -59,17 +59,17 @@ export default function Projects() {
   return (
     <section id="projects" className="container mx-auto px-4 py-12 md:py-20">
       <div className="text-center">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="text-left text-3xl font-bold tracking-tight sm:text-4xl md:text-center">
           My Projects
         </h2>
-        <p className="mx-auto mt-2 max-w-xl text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-xl text-left text-muted-foreground md:text-center">
           A curated selection of my best work.{' '}
           <span className={isDeadpool ? 'text-secondary' : 'text-primary'}>
             Click to explore each project.
           </span>
         </p>
       </div>
-      <div className="relative flex items-center justify-center p-4 sm:p-16">
+      <div className="relative flex items-center justify-center py-8 md:py-12">
         <StackedCarousel slides={imageSlides} />
       </div>
     </section>

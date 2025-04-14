@@ -35,17 +35,17 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="flexw-full container items-center justify-center py-12 md:py-20"
+      className="flexw-full container items-center justify-center py-8 md:py-12"
     >
       <div className="text-center">
-        <h2 className="text-2xl font-semibold tracking-tight md:text-4xl">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Get In Touch
         </h2>
         <p className="mt-4 text-base sm:text-lg">
           I’m always open to new ideas and conversations.
         </p>
 
-        <div className="grid gap-16 px-6 py-24 md:grid-cols-2 md:gap-10 md:px-0 lg:grid-cols-3">
+        <div className="grid gap-16 px-6 py-8 md:grid-cols-2 md:gap-10 md:px-0 lg:grid-cols-3">
           {contactOptions.map(
             ({ icon, title, description, href, label, newTab }, idx) => (
               <div key={idx} className="flex flex-col items-center text-center">

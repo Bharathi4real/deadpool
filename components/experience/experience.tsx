@@ -26,7 +26,7 @@ export default function Experience() {
 
   return (
     <div id="experience" className="container mx-auto py-12 md:py-20">
-      <h2 className="mb-8 text-4xl font-semibold tracking-tight">Experience</h2>
+      <h2 className="mb-6 text-4xl font-semibold tracking-tight">Experience</h2>
       <div className="relative ml-3">
         {/* Timeline line */}
         <div
