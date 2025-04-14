@@ -41,7 +41,6 @@ export function StackedCarousel({
     return positions[index];
   };
 
-  // Autoplay effect
   useEffect(() => {
     const startAutoplay = () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -54,7 +53,6 @@ export function StackedCarousel({
 
     const container = containerRef.current;
 
-    // Pause on hover (optional)
     const stopAutoplay = () =>
       intervalRef.current && clearInterval(intervalRef.current);
     container?.addEventListener('mouseenter', stopAutoplay);
@@ -70,15 +68,19 @@ export function StackedCarousel({
   return (
     <div
       ref={containerRef}
-      className={cn('relative h-[400px] w-[400px]', className)}
+      className={cn(
+        // ✅ Responsive sizing
+        'relative aspect-square w-full max-w-[200px] md:max-w-[300px] lg:max-w-[400px]',
+        className,
+      )}
     >
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 -left-12 z-50 -translate-y-1/2 cursor-pointer rounded-full bg-white/10 p-2 text-white backdrop-blur-md transition-all hover:bg-white/20"
+        className="absolute top-1/2 left-2 z-50 -translate-y-1/2 cursor-pointer rounded-full bg-white/10 p-1 text-white backdrop-blur-md transition-all hover:bg-white/20 sm:-left-12 sm:p-2"
       >
         <svg
-          className="h-6 w-6"
+          className="h-5 w-5 sm:h-6 sm:w-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -93,10 +95,10 @@ export function StackedCarousel({
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 -right-12 z-50 -translate-y-1/2 cursor-pointer rounded-full bg-white/10 p-2 text-white backdrop-blur-md transition-all hover:bg-white/20"
+        className="absolute top-1/2 right-2 z-50 -translate-y-1/2 cursor-pointer rounded-full bg-white/10 p-1 text-white backdrop-blur-md transition-all hover:bg-white/20 sm:-right-12 sm:p-2"
       >
         <svg
-          className="h-6 w-6"
+          className="h-5 w-5 sm:h-6 sm:w-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -121,7 +123,7 @@ export function StackedCarousel({
               key={index}
               className={cn(
                 'absolute top-1/2 left-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-2xl transition-all duration-700',
-                'cursor-pointer hover:scale-105',
+                'cursor-pointer hover:scale-[1.03]',
                 {
                   'z-30': isActive,
                   'z-20': position === 1 || position === slides.length - 1,
@@ -144,15 +146,16 @@ export function StackedCarousel({
                   : '0 0 20px rgba(0, 0, 0, 0.3)',
               }}
             >
-              {/* Hover overlay for active slide */}
               {isActive && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-2xl bg-black/60 text-center text-white opacity-0 transition-opacity duration-500 hover:opacity-100">
-                  <h3 className="text-xl font-semibold">{slide.title}</h3>
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-2xl bg-black/60 p-4 text-center text-white opacity-0 transition-opacity duration-500 hover:opacity-100">
+                  <h3 className="text-base font-semibold sm:text-xl">
+                    {slide.title}
+                  </h3>
                   <a
                     href={slide.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-black transition hover:bg-gray-200"
+                    className="rounded-md bg-white px-3 py-1.5 text-xs font-medium text-black transition hover:bg-gray-200 sm:text-sm"
                   >
                     View Project
                   </a>
@@ -164,7 +167,7 @@ export function StackedCarousel({
       </div>
 
       {/* Indicators */}
-      <div className="absolute -bottom-12 left-1/2 flex -translate-x-1/2 gap-2">
+      <div className="absolute -bottom-10 left-1/2 flex -translate-x-1/2 gap-1 sm:-bottom-12 sm:gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -172,7 +175,7 @@ export function StackedCarousel({
             className={cn(
               'h-2 w-2 rounded-full transition-all',
               index === activeIndex
-                ? `w-6 ${isDeadpool ? 'bg-secondary' : 'bg-primary'}`
+                ? `w-4 sm:w-6 ${isDeadpool ? 'bg-secondary' : 'bg-primary'}`
                 : `${isDeadpool ? 'bg-secondary/50 hover:bg-secondary' : 'bg-primary/50 hover:bg-primary'}`,
             )}
           />

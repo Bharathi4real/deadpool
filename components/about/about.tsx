@@ -33,8 +33,8 @@ export default function About() {
               <div
                 className={
                   isDeadpool
-                    ? 'text-5xl font-bold text-secondary hover:text-primary'
-                    : 'text-5xl font-bold text-primary hover:text-secondary'
+                    ? 'text-4xl font-bold text-secondary hover:text-primary md:text-4xl'
+                    : 'text-3xl font-bold text-primary hover:text-secondary md:text-4xl'
                 }
               >
                 50+
@@ -45,8 +45,8 @@ export default function About() {
               <div
                 className={
                   isDeadpool
-                    ? 'text-5xl font-bold text-secondary hover:text-primary'
-                    : 'text-5xl font-bold text-primary hover:text-secondary'
+                    ? 'text-4xl font-bold text-secondary hover:text-primary md:text-4xl'
+                    : 'text-3xl font-bold text-primary hover:text-secondary md:text-4xl'
                 }
               >
                 20+
@@ -57,8 +57,8 @@ export default function About() {
               <div
                 className={
                   isDeadpool
-                    ? 'text-5xl font-bold text-secondary hover:text-primary'
-                    : 'text-5xl font-bold text-primary hover:text-secondary'
+                    ? 'text-4xl font-bold text-secondary hover:text-primary md:text-4xl'
+                    : 'text-3xl font-bold text-primary hover:text-secondary md:text-4xl'
                 }
               >
                 100K+
