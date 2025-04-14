@@ -30,6 +30,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/hero/hero1.tsx"
-  ],
+, "next.config.js"  ],
   "exclude": ["node_modules"]
 }
